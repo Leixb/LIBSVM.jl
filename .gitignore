@@ -5,3 +5,5 @@ test*.jl
 
 deps/build.log
 Manifest.toml
+
+LocalPreferences.toml
