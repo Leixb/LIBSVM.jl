@@ -25,11 +25,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1679397908,
-        "narHash": "sha256-kAqos6fBZnw/Fj12kJQlEbY2HI49j9Rh9uyUrccU2ZI=",
+        "lastModified": 1679398740,
+        "narHash": "sha256-myM5c0G4Udi40a6SH82sCbBoSdP+bAndILNJYG/B5kM=",
         "owner": "LeixB",
         "repo": "libsvm",
-        "rev": "19e364426a2ab5caab8b943bba09859e5eab756d",
+        "rev": "50addd496ef10145ed85ac4f5bcef30af9d88ba9",
         "type": "github"
       },
       "original": {

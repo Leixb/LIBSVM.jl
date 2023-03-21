@@ -56,6 +56,7 @@ struct SVM{T, K}
     coefs::Array{Float64,2}
     probA::Vector{Float64}
     probB::Vector{Float64}
+    prob_density_marks::Vector{Float64}
 
     rho::Vector{Float64}
     degree::Int32
@@ -97,6 +98,13 @@ function SVM(smc::SVMModel, y, X, weights, labels, svmtype, kernel)
         unsafe_copyto!(pointer(probB), smc.probB, rs)
     end
 
+    if smc.prob_density_marks == C_NULL
+        prob_density_marks = Float64[]
+    else
+        prob_density_marks = Vector{Float64}(undef, rs)
+        unsafe_copyto!(pointer(prob_density_marks), smc.prob_density_marks, rs)
+    end
+
     # Weights
     nw = smc.param.nr_weight
     libsvmweight = Array{Float64}(undef, nw)
@@ -109,7 +117,7 @@ function SVM(smc::SVMModel, y, X, weights, labels, svmtype, kernel)
 
     SVM(svmtype, kernel, weights, size(X, 1), size(X, 2),
         smc.nr_class, labels, libsvmlabel, libsvmweight, libsvmweight_label,
-        svs, smc.param.coef0, coefs, probA, probB,
+        svs, smc.param.coef0, coefs, probA, probB, prob_density_marks,
         rho, smc.param.degree,
         smc.param.gamma, smc.param.cache_size, smc.param.eps,
         smc.param.C, smc.param.nu, smc.param.p, Bool(smc.param.shrinking),
@@ -149,7 +157,7 @@ function svmmodel(mod::SVM)
     data = SVMData(sv_coef, nodes, ptrs)
 
     cmod = SVMModel(param, mod.nclasses, mod.SVs.l, pointer(data.nodeptrs), pointer(data.coefs),
-                pointer(mod.rho), pointer(mod.probA), pointer(mod.probB), pointer(mod.SVs.indices),
+                pointer(mod.rho), pointer(mod.probA), pointer(mod.probB), pointer(mod.prob_density_marks), pointer(mod.SVs.indices),
                 pointer(mod.libsvmlabel),
                 pointer(mod.SVs.nSV), Int32(1))
 

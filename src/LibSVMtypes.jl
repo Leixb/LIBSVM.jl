@@ -32,18 +32,19 @@ struct SVMParameter
 end
 
 struct SVMModel
-   param     ::SVMParameter
-   nr_class  ::Cint
-   l         ::Cint
-   SV        ::Ptr{Ptr{SVMNode}}
-   sv_coef   ::Ptr{Ptr{Cdouble}}
-   rho       ::Ptr{Cdouble}
-   probA     ::Ptr{Cdouble}
-   probB     ::Ptr{Cdouble}
-   sv_indices::Ptr{Cint}
+   param             ::SVMParameter
+   nr_class          ::Cint
+   l                 ::Cint
+   SV                ::Ptr{Ptr{SVMNode}}
+   sv_coef           ::Ptr{Ptr{Cdouble}}
+   rho               ::Ptr{Cdouble}
+   probA             ::Ptr{Cdouble}
+   probB             ::Ptr{Cdouble}
+   prob_density_marks::Ptr{Cdouble}
+   sv_indices        ::Ptr{Cint}
 
-   label     ::Ptr{Cint}
-   nSV       ::Ptr{Cint}
+   label             ::Ptr{Cint}
+   nSV               ::Ptr{Cint}
 
-   free_sv   ::Cint
+   free_sv           ::Cint
 end
