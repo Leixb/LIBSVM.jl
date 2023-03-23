@@ -98,11 +98,12 @@ function SVM(smc::SVMModel, y, X, weights, labels, svmtype, kernel)
         unsafe_copyto!(pointer(probB), smc.probB, rs)
     end
 
+    nr_marks = 10
     if smc.prob_density_marks == C_NULL
         prob_density_marks = Float64[]
     else
-        prob_density_marks = Vector{Float64}(undef, rs)
-        unsafe_copyto!(pointer(prob_density_marks), smc.prob_density_marks, rs)
+        prob_density_marks = Vector{Float64}(undef, nr_marks)
+        unsafe_copyto!(pointer(prob_density_marks), smc.prob_density_marks, nr_marks)
     end
 
     # Weights
