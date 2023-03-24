@@ -15,29 +15,6 @@
         "type": "github"
       }
     },
-    "libsvm": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1679398740,
-        "narHash": "sha256-myM5c0G4Udi40a6SH82sCbBoSdP+bAndILNJYG/B5kM=",
-        "owner": "LeixB",
-        "repo": "libsvm",
-        "rev": "50addd496ef10145ed85ac4f5bcef30af9d88ba9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "LeixB",
-        "repo": "libsvm",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1679281263,
@@ -57,7 +34,6 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "libsvm": "libsvm",
         "nixpkgs": "nixpkgs"
       }
     }
