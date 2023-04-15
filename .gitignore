@@ -3,6 +3,8 @@
 *.o
 test*.jl
 
+serialized_svm.jls
+
 deps/build.log
 Manifest.toml
 
