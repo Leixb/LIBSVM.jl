@@ -281,6 +281,7 @@ end
         probability::Bool = false,
         weights::Union{Dict{T,Float64},Cvoid} = nothing,
         cachesize::Float64 = 200.0,
+        max_iter::Integer = -1,
         verbose::Bool = false
     ) where {T,U<:Real}
 
@@ -307,6 +308,7 @@ For one-class SVM use only `X`.
 * `probability::Bool = false`: whether to train a SVC or SVR model for probability estimates
 * `weights::Union{Dict{T, Float64}, Cvoid} = nothing`: dictionary of class weights
 * `cachesize::Float64 = 200.0`: cache memory size in MB
+* `max_iter::Integer = -1`: maximum number of iterations, or -1 for no limit
 * `verbose::Bool = false`: print training output from LIBSVM if true
 * `nt::Integer = 0`: number of OpenMP cores to use, if 0 it is set to OMP_NUM_THREADS, if negative it is set to the max number of threads
 
