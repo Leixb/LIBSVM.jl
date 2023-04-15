@@ -43,7 +43,15 @@ end
         @test model.n_iter == [28, 27, 19]
         model = svmtrain(instances[:, 1:2:end], labels[1:2:end]; max_iter=11, verbose = true)
         GC.gc()
+        class_niter = test_iris_model(model, instances[:, 2:2:end], labels[2:2:end])
         @test model.n_iter == [11, 11, 11]
+
+        @testset "sklearn API" begin
+                skmodel = fit!(SVC(max_iter=Int32(11)), instances[:,1:2:end]', labels[1:2:end])
+            GC.gc()
+            skclass_niter = predict(skmodel, instances[:, 2:2:end]')
+            @test skclass_niter == class_niter
+        end
     end
 
     @testset "sklearn API" begin

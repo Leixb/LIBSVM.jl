@@ -21,42 +21,48 @@ end
 SVC(;kernel = Kernel.RadialBasis, gamma::Union{Float64,Symbol} = :auto,
     weights = nothing, cost::Float64 = 1.0, degree::Int32 = Int32(3),
     coef0::Float64 = 0.0, tolerance::Float64 = .001,
+    max_iter::Int32 = Int32(-1),
     shrinking::Bool = true, probability::Bool = false,
     verbose::Bool = false) = SVC(kernel, gamma,
-    weights, cost, degree, coef0, tolerance, shrinking,
+    weights, cost, degree, coef0, tolerance, shrinking, max_iter,
     probability, verbose, nothing)
-@declare_hyperparameters(SVC, [:kernel, :gamma, :weights, :cost, :degree, :coef0, :tolerance])
+@declare_hyperparameters(SVC, [:kernel, :gamma, :weights, :cost, :degree, :coef0, :tolerance, :max_iter])
 
 NuSVC(;kernel = Kernel.RadialBasis, gamma::Union{Float64,Symbol} = :auto,
         weights = nothing, nu::Float64 = 0.5, cost::Float64 = 1.0,
         degree::Int32 = Int32(3), coef0::Float64 = 0.,
-        tolerance::Float64 = .001, shrinking::Bool = true,
+        tolerance::Float64 = .001,
+        max_iter::Int32 = Int32(-1),
+        shrinking::Bool = true,
         verbose::Bool = false,) = NuSVC(kernel, gamma, weights, nu, cost,
-            degree, coef0, tolerance, shrinking, verbose, nothing)
-@declare_hyperparameters(NuSVC, [:kernel, :gamma, :weights, :nu, :cost, :degree, :coef0, :tolerance])
+            degree, coef0, tolerance, shrinking, max_iter, verbose, nothing)
+@declare_hyperparameters(NuSVC, [:kernel, :gamma, :weights, :nu, :cost, :degree, :coef0, :tolerance, :max_iter])
 
 OneClassSVM(;kernel = Kernel.RadialBasis, gamma::Union{Float64,Symbol} = :auto,
         nu::Float64 = 0.1, cost::Float64 = 1.0, degree::Int32 = Int32(3),
         coef0::Float64 = 0.0, tolerance::Float64 = .001,
         shrinking::Bool = true,
+        max_iter::Int32 = Int32(-1),
         verbose::Bool = false,) = OneClassSVM(kernel, gamma, nu, cost,
-        degree, coef0, tolerance, shrinking, verbose, nothing)
-@declare_hyperparameters(OneClassSVM, [:kernel, :gamma, :nu, :cost, :degree, :coef0, :tolerance])
+        degree, coef0, tolerance, shrinking, max_iter, verbose, nothing)
+@declare_hyperparameters(OneClassSVM, [:kernel, :gamma, :nu, :cost, :degree, :coef0, :tolerance, :max_iter])
 
 NuSVR(;kernel = Kernel.RadialBasis, gamma::Union{Float64,Symbol} = :auto,
         nu::Float64 = 0.5, cost::Float64 = 1.0, degree::Int32 = Int32(3), coef0::Float64 = 0.,
         tolerance::Float64 = .001, shrinking::Bool = true,
+        max_iter::Int32 = Int32(-1),
         verbose::Bool = false,) = NuSVR(kernel, gamma, nu, cost,
-                    degree, coef0, tolerance, shrinking, verbose, nothing)
-@declare_hyperparameters(NuSVR, [:kernel, :gamma, :nu, :cost, :degree, :coef0, :tolerance])
+                    degree, coef0, tolerance, shrinking, max_iter, verbose, nothing)
+@declare_hyperparameters(NuSVR, [:kernel, :gamma, :nu, :cost, :degree, :coef0, :tolerance, :max_iter])
 
 EpsilonSVR(;kernel = Kernel.RadialBasis, gamma::Union{Float64,Symbol} = :auto,
         epsilon::Float64 = 0.1, cost::Float64 = 1.0,
         degree::Int32 = Int32(3), coef0::Float64 = 0.,
         tolerance::Float64 = .001, shrinking::Bool = true,
+        max_iter::Int32 = Int32(-1),
         verbose::Bool = false,) = EpsilonSVR(kernel, gamma, epsilon, cost,
-                        degree, coef0, tolerance, shrinking, verbose, nothing)
-@declare_hyperparameters(EpsilonSVR, [:kernel, :gamma, :epsilon, :cost, :degree, :coef0, :tolerance])
+                        degree, coef0, tolerance, shrinking, max_iter, verbose, nothing)
+@declare_hyperparameters(EpsilonSVR, [:kernel, :gamma, :epsilon, :cost, :degree, :coef0, :tolerance, :max_iter])
 
 LinearSVC(;solver = Linearsolver.L2R_L2LOSS_SVC_DUAL,
           weights::Union{Dict, Cvoid} = nothing, tolerance::Float64=Inf,

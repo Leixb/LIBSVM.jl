@@ -13,6 +13,7 @@ mutable struct SVC<:AbstractSVC
     coef0::Float64
     tolerance::Float64
     shrinking::Bool
+    max_iter::Int32
     probability::Bool
     verbose::Bool
 
@@ -28,6 +29,7 @@ mutable struct NuSVC<:AbstractSVC
     degree::Int32
     coef0::Float64
     tolerance::Float64
+    max_iter::Int32
     shrinking::Bool
     verbose::Bool
 
@@ -43,6 +45,7 @@ mutable struct OneClassSVM<:AbstractSVC
     coef0::Float64
     tolerance::Float64
     shrinking::Bool
+    max_iter::Int32
     verbose::Bool
 
     fit::Union{SVM, Cvoid}
@@ -57,6 +60,7 @@ mutable struct NuSVR<:AbstractSVR
     coef0::Float64
     tolerance::Float64
     shrinking::Bool
+    max_iter::Int32
     verbose::Bool
 
     fit::Union{SVM, Cvoid}
@@ -71,6 +75,7 @@ mutable struct EpsilonSVR<:AbstractSVR
     coef0::Float64
     tolerance::Float64
     shrinking::Bool
+    max_iter::Int32
     verbose::Bool
 
     fit::Union{SVM, Cvoid}
