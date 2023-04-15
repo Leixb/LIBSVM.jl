@@ -43,6 +43,7 @@ struct SVMModel
    probB             ::Ptr{Cdouble}
    prob_density_marks::Ptr{Cdouble}
    sv_indices        ::Ptr{Cint}
+   n_iter            ::Ptr{Cint}
 
    label             ::Ptr{Cint}
    nSV               ::Ptr{Cint}
