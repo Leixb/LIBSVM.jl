@@ -39,6 +39,8 @@ end
     GC.gc()
     class = test_iris_model(model, instances[:, 2:2:end], labels[2:2:end])
 
+    @test model.n_iter == [28, 27, 19]
+
     @testset "sklearn API" begin
         skmodel = fit!(SVC(), instances[:,1:2:end]', labels[1:2:end])
         GC.gc()
