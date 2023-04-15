@@ -129,7 +129,7 @@ function SVM(smc::SVMModel, y, X, weights, labels, svmtype, kernel)
         rho, smc.param.degree,
         smc.param.gamma, smc.param.cache_size, smc.param.eps,
         smc.param.C, smc.param.nu, smc.param.p, Bool(smc.param.shrinking),
-        Bool(smc.param.probability))
+        Bool(smc.param.probability), smc.param.max_iter)
 end
 
 #Keep data for SVMModel to prevent GC
@@ -166,6 +166,7 @@ function svmmodel(mod::SVM)
 
     cmod = SVMModel(param, mod.nclasses, mod.SVs.l, pointer(data.nodeptrs), pointer(data.coefs),
                 pointer(mod.rho), pointer(mod.probA), pointer(mod.probB), pointer(mod.prob_density_marks), pointer(mod.SVs.indices),
+                pointer(mod.n_iter),
                 pointer(mod.libsvmlabel),
                 pointer(mod.SVs.nSV), Int32(1))
 
@@ -335,6 +336,7 @@ function svmtrain(
         probability::Bool = false,
         weights::Union{Dict{T,Float64},Cvoid} = nothing,
         cachesize::Float64 = 200.0,
+        max_iter::Integer = -1,
         verbose::Bool = false,
         nt::Integer = 1) where {T,U<:Real}
     set_num_threads(nt)
@@ -365,7 +367,7 @@ function svmtrain(
         _svmtype, _kernel, Int32(degree), Float64(gamma),
         coef0, cachesize, tolerance, cost, Int32(length(weights)),
         pointer(weight_labels), pointer(weights), nu, epsilon, Int32(shrinking),
-        Int32(probability))
+        Int32(probability), max_iter)
 
     ninstances = size(X, 2)
 
