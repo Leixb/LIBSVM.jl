@@ -68,6 +68,7 @@ struct SVM{T, K}
     epsilon::Float64
     shrinking::Bool
     probability::Bool
+    max_iter::Int32
 end
 
 function SVM(smc::SVMModel, y, X, weights, labels, svmtype, kernel)
@@ -140,7 +141,7 @@ function svmmodel(mod::SVM)
     param = SVMParameter(svm_type, kernel, mod.degree, mod.gamma,
                         mod.coef0, mod.cache_size, mod.tolerance, mod.cost,
                         length(mod.libsvmweight), pointer(mod.libsvmweightlabel), pointer(mod.libsvmweight),
-                        mod.nu, mod.epsilon, Int32(mod.shrinking), Int32(mod.probability))
+                        mod.nu, mod.epsilon, Int32(mod.shrinking), Int32(mod.probability), mod.max_iter)
 
     n,m = size(mod.coefs)
     sv_coef = Vector{Ptr{Float64}}(undef, m)

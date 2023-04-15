@@ -29,6 +29,7 @@ struct SVMParameter
     p           ::Cdouble
     shrinking   ::Cint
     probability ::Cint
+    max_iter    ::Cint
 end
 
 struct SVMModel
