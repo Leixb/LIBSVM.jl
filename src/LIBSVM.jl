@@ -57,6 +57,7 @@ struct SVM{T, K}
     probA::Vector{Float64}
     probB::Vector{Float64}
     prob_density_marks::Vector{Float64}
+    n_iter::Vector{Int32}
 
     rho::Vector{Float64}
     degree::Int32
@@ -107,6 +108,10 @@ function SVM(smc::SVMModel, y, X, weights, labels, svmtype, kernel)
         unsafe_copyto!(pointer(prob_density_marks), smc.prob_density_marks, nr_marks)
     end
 
+    # Number of iterations
+    n_iters = Array{Int32}(undef, smc.l)
+    unsafe_copyto!(pointer(n_iters), smc.n_iter, smc.l)
+
     # Weights
     nw = smc.param.nr_weight
     libsvmweight = Array{Float64}(undef, nw)
@@ -120,6 +125,7 @@ function SVM(smc::SVMModel, y, X, weights, labels, svmtype, kernel)
     SVM(svmtype, kernel, weights, size(X, 1), size(X, 2),
         smc.nr_class, labels, libsvmlabel, libsvmweight, libsvmweight_label,
         svs, smc.param.coef0, coefs, probA, probB, prob_density_marks,
+        n_iters,
         rho, smc.param.degree,
         smc.param.gamma, smc.param.cache_size, smc.param.eps,
         smc.param.C, smc.param.nu, smc.param.p, Bool(smc.param.shrinking),
