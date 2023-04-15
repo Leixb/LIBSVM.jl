@@ -83,6 +83,10 @@ function SVM(smc::SVMModel, y, X, weights, labels, svmtype, kernel)
     rho = Vector{Float64}(undef, rs)
     unsafe_copyto!(pointer(rho), smc.rho, rs)
 
+    # Number of iterations
+    n_iters = Array{Int32}(undef, rs)
+    unsafe_copyto!(pointer(n_iters), smc.n_iter, rs)
+
     if smc.label == C_NULL
         libsvmlabel = Vector{Int32}(undef, 0)
     else
@@ -107,10 +111,6 @@ function SVM(smc::SVMModel, y, X, weights, labels, svmtype, kernel)
         prob_density_marks = Vector{Float64}(undef, nr_marks)
         unsafe_copyto!(pointer(prob_density_marks), smc.prob_density_marks, nr_marks)
     end
-
-    # Number of iterations
-    n_iters = Array{Int32}(undef, smc.l)
-    unsafe_copyto!(pointer(n_iters), smc.n_iter, smc.l)
 
     # Weights
     nw = smc.param.nr_weight
