@@ -19,6 +19,6 @@ end
 module Kernel
 
 # https://github.com/cjlin1/libsvm/blob/557d85749aaf0ca83fd229af0f00e4f4cb7be85c/svm.h#L26
-@enum KERNEL Linear Polynomial RadialBasis Sigmoid Precomputed Asin AsinNorm Acos0 Acos1 Acos2
+@enum KERNEL Linear Polynomial RadialBasis Sigmoid Precomputed Asin AsinNorm Acos0 Acos1 Acos2 Acos1Norm Acos2Norm
 
 end
